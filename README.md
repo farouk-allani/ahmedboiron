@@ -1,86 +1,68 @@
-Pour répartir les échantillons selon vos critères, voici une méthode détaillée que j'ai utilisée :
+Pour répartir tous les tubes et doses pour chaque membre de l'équipe et remplir le tableau dans `Feuil2`, nous devons suivre une approche méthodique. Voici comment procéder étape par étape :
 
-### Étapes de Répartition des Échantillons
+### Étapes de Répartition
 
-1. **Comprendre les Données** :
-    - **Feuil1** : Contient la liste des tubes et doses avec leurs quantités disponibles.
-    - **Feuil2** : Contient le nom des délégués et le nombre de médecins qu’ils couvrent.
+1. **Calcul du Total des Médecins Couverts** :
+    - Additionner le nombre total de médecins couverts par tous les délégués.
+    
+2. **Calcul du Total d'Échantillons Nécessaires** :
+    - Chaque médecin doit recevoir 6 tubes différents et 6 doses (réparties en 3+3).
+    - Multiplier le total des médecins par 6 pour obtenir le total de tubes et doses nécessaires.
 
-2. **Critères de Distribution** :
-    - Chaque médecin doit recevoir :
-        - 6 tubes différents
-        - 6 doses (réparties en 3+3)
-
-3. **Calcul du Total d'Échantillons Nécessaires** :
-    - Calculer le total des médecins couverts par tous les délégués.
-    - Multiplier ce nombre par 6 pour obtenir le total des tubes nécessaires.
-    - Multiplier ce nombre par 6 pour obtenir le total des doses nécessaires.
-
-4. **Répartition Équitable des Tubes et Doses** :
+3. **Répartition Proportionnelle des Tubes et Doses** :
     - Diviser les tubes et doses disponibles proportionnellement au nombre de médecins couverts par chaque délégué.
 
-### Formules et Méthodes Utilisées
+### Formules Utilisées
 
 #### Feuil2 : Calculs Préliminaires
 - **Total Médecins Couverts** : 
     ```excel
     =SUM(B2:B7)
     ```
-- **Total Tubes Nécessaires** : 
-    ```excel
-    =Total_Médecins_Couverts * 6
-    ```
-- **Total Doses Nécessaires** : 
+- **Total Tubes/Doses Nécessaires** : 
     ```excel
     =Total_Médecins_Couverts * 6
     ```
 
 #### Feuil2 : Attribution aux Délégués
-- **Tubes Attribués par Délégué** : 
+- **Tubes/Doses Attribués par Délégué** : 
     ```excel
-    =ROUND((Nombre_Médecins_Délégué / Total_Médecins_Couverts) * Total_Tubes_Nécessaires, 0)
+    =ROUND((Nombre_Médecins_Délégué / Total_Médecins_Couverts) * Quantité_Disponible, 0)
     ```
-- **Doses Attribuées par Délégué** : 
-    ```excel
-    =ROUND((Nombre_Médecins_Délégué / Total_Médecins_Couverts) * Total_Doses_Nécessaires, 0)
-    ```
-
-#### Feuil2 : Répartition Spécifique des Tubes/Doses
-Créer une nouvelle feuille ou ajouter des colonnes pour lister explicitement les tubes/doses attribués à chaque délégué.
 
 ### Exemple de Répartition dans Excel
 
-Voici un exemple simplifié de comment organiser la répartition dans une nouvelle feuille (`Feuil3`) :
+Voici un exemple de la manière dont remplir chaque cellule pour chaque type de tube/dose :
 
-| Délégué | Nombre Médecins | Tubes Attribués | Doses Attribuées |
-|---------|-----------------|-----------------|------------------|
-| Rahma   | 73              | 438             | 438              |
-| Ahmed B | 76              | 456             | 456              |
-| Nizar   | 53              | 318             | 318              |
-| Houssem | 203             | 1218            | 1218             |
-| Taher   | 94              | 564             | 564              |
-| Ahmed A | 60              | 360             | 360              |
+| Délégué | Nombre Médecins | SULFUR 15CH DOSES | FOLLICULINUM 15CH DOSES | GELSEMIUM 30CH DOSES | SILICEA 15CH DOSES | ... |
+|---------|-----------------|-------------------|-------------------------|-----------------------|---------------------|-----|
+| Rahma   | 73              | =ROUND((B2/$B$8)*Feuil1!C2, 0) | =ROUND((B2/$B$8)*Feuil1!C3, 0) | =ROUND((B2/$B$8)*Feuil1!C4, 0) | =ROUND((B2/$B$8)*Feuil1!C5, 0) | ... |
+| Ahmed B | 76              | =ROUND((B3/$B$8)*Feuil1!C2, 0) | =ROUND((B3/$B$8)*Feuil1!C3, 0) | =ROUND((B3/$B$8)*Feuil1!C4, 0) | =ROUND((B3/$B$8)*Feuil1!C5, 0) | ... |
+| Nizar   | 53              | =ROUND((B4/$B$8)*Feuil1!C2, 0) | =ROUND((B4/$B$8)*Feuil1!C3, 0) | =ROUND((B4/$B$8)*Feuil1!C4, 0) | =ROUND((B4/$B$8)*Feuil1!C5, 0) | ... |
+| Houssem | 203             | =ROUND((B5/$B$8)*Feuil1!C2, 0) | =ROUND((B5/$B$8)*Feuil1!C3, 0) | =ROUND((B5/$B$8)*Feuil1!C4, 0) | =ROUND((B5/$B$8)*Feuil1!C5, 0) | ... |
+| Taher   | 94              | =ROUND((B6/$B$8)*Feuil1!C2, 0) | =ROUND((B6/$B$8)*Feuil1!C3, 0) | =ROUND((B6/$B$8)*Feuil1!C4, 0) | =ROUND((B6/$B$8)*Feuil1!C5, 0) | ... |
+| Ahmed A | 60              | =ROUND((B7/$B$8)*Feuil1!C2, 0) | =ROUND((B7/$B$8)*Feuil1!C3, 0) | =ROUND((B7/$B$8)*Feuil1!C4, 0) | =ROUND((B7/$B$8)*Feuil1!C5, 0) | ... |
 
-#### Feuil3 : Détail des Tubes/Doses Attribués
-Pour chaque délégué, spécifiez exactement quels tubes et doses ils distribueront :
+### Instructions Pas à Pas
 
-| Délégué | Tube/Dose Type      | Quantité Attribuée |
-|---------|---------------------|--------------------|
-| Rahma   | SULFUR 15CH DOSES   | 73                |
-| Rahma   | FOLLICULINUM 15CH DOSES | 73              |
-| ...     | ...                 | ...               |
-| Ahmed B | ARSENICUM ALBUM 15CH TUBES | 76           |
-| ...     | ...                 | ...               |
+1. **Calculer le Total des Médecins Couverts** :
+    - Dans la cellule `B8` de `Feuil2`, insérez la formule :
+        ```excel
+        =SUM(B2:B7)
+        ```
 
-### Résumé des Formules Utilisées
+2. **Attribution des Tubes/Doses** :
+    - Pour chaque cellule correspondant à un type de tube ou dose pour chaque délégué, utilisez la formule donnée ci-dessus. Par exemple, pour attribuer les "SULFUR 15CH DOSES" à Rahma :
+        ```excel
+        =ROUND((B2/$B$8)*Feuil1!C2, 0)
+        ```
+    - Copiez cette formule pour toutes les autres cellules correspondantes en ajustant les références de cellules selon le besoin.
 
-1. **Total Médecins Couverts** : `=SUM(B2:B7)`
-2. **Total Tubes/Doses Nécessaires** : `=Total_Médecins_Couverts * 6`
-3. **Tubes/Doses Attribués par Délégué** : 
-    ```excel
-    =ROUND((Nombre_Médecins_Délégué / Total_Médecins_Couverts) * Total_Tubes/Doses_Nécessaires, 0)
-    ```
+3. **Vérification** :
+    - Assurez-vous que la somme des quantités attribuées pour chaque type de tube/dose ne dépasse pas la quantité disponible dans `Feuil1`.
 
-En suivant cette méthodologie, vous pouvez créer une répartition claire et équitable des échantillons entre les délégués tout en respectant les critères donnés.
+### Résultat Final
 
-Si vous voulez un fichier Excel concret modélisant ces calculs et répartitions, je peux vous aider à générer cela via une plateforme comme Google Sheets ou Microsoft Excel Online.
+Le résultat final sera un tableau complètement rempli avec la répartition proportionnelle des tubes et doses pour chaque délégué, respectant ainsi les critères définis.
+
+Si vous avez accès à Google Sheets ou Microsoft Excel Online, je peux vous aider à créer ce fichier directement et vous fournir un lien partagé si nécessaire.
